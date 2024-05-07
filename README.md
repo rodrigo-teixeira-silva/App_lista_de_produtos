@@ -5,7 +5,7 @@
 
 # Sobre o projeto
 
-Aplicação para de lista de prudutos com botões menu, adicionar produtos, toolbar personalizada, auteração de titulo, background, configuração de menus e tratativa de evento de click.
+Aplicação de lista de produtos com botões menu, adicionar produtos, toolbar personalizada, auteração de titulo, background, configuração de menus e tratativa de evento de click.
 
  **</>Codelink**.
 

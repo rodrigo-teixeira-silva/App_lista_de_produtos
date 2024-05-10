@@ -1,5 +1,6 @@
 package com.example.controledeprodutos;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
             ibAdd = findViewById(R.id.ib_add);
             ibVerMais = findViewById(R.id.ib_ver_mais);
-            rvProdutos =findViewById(R.id.rvProdutos);
+            rvProdutos = findViewById(R.id.rvProdutos);
 
             carregaLista();
 
@@ -62,21 +63,22 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
     }
 
-    private void ouvinteCliques(){
+    private void ouvinteCliques() {
         ibAdd.setOnClickListener(view -> {
-            Toast.makeText(this, "Add", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Add", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, FormProdutoActvty.class));
         });
 
         ibVerMais.setOnClickListener(view -> {
 
-            PopupMenu popupMenu = new PopupMenu(this, ibVerMais );
-            popupMenu.getMenuInflater().inflate(R.menu.menu_toolbar,popupMenu.getMenu());
+            PopupMenu popupMenu = new PopupMenu(this, ibVerMais);
+            popupMenu.getMenuInflater().inflate(R.menu.menu_toolbar, popupMenu.getMenu());
 
             popupMenu.setOnMenuItemClickListener(MenuItem -> {
-                if(MenuItem.getItemId() == R.id.menu_sobre){
+                if (MenuItem.getItemId() == R.id.menu_sobre) {
                     Toast.makeText(this, "Sobre", Toast.LENGTH_SHORT).show();
                 }
-            return true;
+                return true;
             });
             popupMenu.show();
 
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
     }
 
     //metodo
-    private void configRecycleView(){
+    private void configRecycleView() {
         rvProdutos.setLayoutManager(new LinearLayoutManager(this));
         rvProdutos.setHasFixedSize(true);
         adapterProduto = new AdapterProduto(produtoList, this);
@@ -104,13 +106,11 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
                 produtoList.remove(position);
                 adapterProduto.notifyItemRemoved(position);
 
-
             }
         });
+    }
 
-
-}
-    private void carregaLista(){
+    private void carregaLista() {
 
         Produto produto1 = new Produto();
         produto1.setNome("Monitor 34 LG");
@@ -155,12 +155,8 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
     @Override
     public Void onClickListener(Produto prooduto) {
-        Toast.makeText(this,prooduto.getNome() , Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, prooduto.getNome(), Toast.LENGTH_SHORT).show();
 
         return null;
     }
-
-
-
-
 }

@@ -1,42 +1,32 @@
-package com.example.controledeprodutos;
+package com.example.controledeprodutos.activity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.controledeprodutos.adapter.AdapterProduto;
+import com.example.controledeprodutos.model.Produto;
+import com.example.controledeprodutos.ProdutoDAO;
+import com.example.controledeprodutos.R;
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
 import com.tsuryo.swipeablerv.SwipeableRecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterProduto.OnClick {
 
     private AdapterProduto adapterProduto;
-    private List<Produto> produtoList = new ArrayList<>();
     private SwipeableRecyclerView rvProdutos;
-
-
     private ImageButton ibAdd;
     private ImageButton ibVerMais;
-
+    private ProdutoDAO produtoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +40,7 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
             ibAdd = findViewById(R.id.ib_add);
             ibVerMais = findViewById(R.id.ib_ver_mais);
             rvProdutos = findViewById(R.id.rvProdutos);
-
-            carregaLista();
+            produtoDAO = new ProdutoDAO(this);
 
             configRecycleView();
 
@@ -60,7 +49,6 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
             return insets;
 
         });
-
     }
 
     private void ouvinteCliques() {
@@ -83,14 +71,13 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
             popupMenu.show();
 
         });
-
     }
 
     //metodo
     private void configRecycleView() {
         rvProdutos.setLayoutManager(new LinearLayoutManager(this));
         rvProdutos.setHasFixedSize(true);
-        adapterProduto = new AdapterProduto(produtoList, this);
+        adapterProduto = new AdapterProduto(produtoDAO.getlistProduto(), this);
         rvProdutos.setAdapter(adapterProduto);
 
         rvProdutos.setListener(new SwipeLeftRightCallback.Listener() {
@@ -101,56 +88,12 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
             @Override
             public void onSwipedRight(int position) {
-//                mList.remove(position);
-//                mAdapter.notifyDataSetChanged();
-                produtoList.remove(position);
+
+                produtoDAO.getlistProduto().remove(position);
                 adapterProduto.notifyItemRemoved(position);
 
             }
         });
-    }
-
-    private void carregaLista() {
-
-        Produto produto1 = new Produto();
-        produto1.setNome("Monitor 34 LG");
-        produto1.setEstoque(45);
-        produto1.setValor(1349.99);
-
-        Produto produto2 = new Produto();
-        produto2.setNome("Caixa de Som C3 Tech");
-        produto2.setEstoque(15);
-        produto2.setValor(149.99);
-
-        Produto produto3 = new Produto();
-        produto3.setNome("Microfone Blue yeti");
-        produto3.setEstoque(38);
-        produto3.setValor(1699.99);
-
-        Produto produto4 = new Produto();
-        produto4.setNome("Gabinete NZXT H440");
-        produto4.setEstoque(15);
-        produto4.setValor(979.99);
-
-        Produto produto5 = new Produto();
-        produto5.setNome("Placa Mãe Asus");
-        produto5.setEstoque(60);
-        produto5.setValor(1199.99);
-
-        Produto produto6 = new Produto();
-        produto6.setNome("Memória Corsair 16GB");
-        produto6.setEstoque(44);
-        produto6.setValor(599.99);
-
-        produtoList.add(produto1);
-        produtoList.add(produto2);
-        produtoList.add(produto3);
-        produtoList.add(produto3);
-        produtoList.add(produto4);
-        produtoList.add(produto5);
-        produtoList.add(produto6);
-
-
     }
 
     @Override

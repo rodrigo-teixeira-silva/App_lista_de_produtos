@@ -1,9 +1,8 @@
-package com.example.controledeprodutos;
+package com.example.controledeprodutos.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,11 +10,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.controledeprodutos.model.Produto;
+import com.example.controledeprodutos.ProdutoDAO;
+import com.example.controledeprodutos.R;
+
 public class FormProdutoActvty extends AppCompatActivity {
 
     private EditText edit_produto;
     private EditText edit_quantidade;
     private EditText edit_valor;
+    private ProdutoDAO produtoDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +31,12 @@ public class FormProdutoActvty extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
             edit_produto = findViewById(R.id.edit_produto);
+
+            produtoDAO = new  ProdutoDAO(this);
+
+            edit_produto = findViewById(R.id.edit_produto);
             edit_quantidade = findViewById(R.id.edit_quantidade);
             edit_valor = findViewById(R.id.edit_valor);
-
 
             return insets;
         });
@@ -53,7 +60,15 @@ public class FormProdutoActvty extends AppCompatActivity {
                         double valorProduto = Double.parseDouble(valor);
 
                         if (valorProduto > 0) {
-                            Toast.makeText(this, "Tudo certo!", Toast.LENGTH_SHORT).show();
+                            Produto produto = new Produto();
+                            produto.setNome(nome);
+                            produto.setEstoque(qnt);
+                            produto.setValor(valorProduto);
+
+                            produtoDAO.salvarProduto(produto);
+
+                            finish();
+
                         } else {
                             edit_valor.requestFocus();
                             edit_valor.setError("Informe o valor maior que zero");
@@ -77,7 +92,5 @@ public class FormProdutoActvty extends AppCompatActivity {
             edit_produto.requestFocus();
             edit_produto.setError("Informe o nome do produto");
         }
-
-
     }
 }

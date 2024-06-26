@@ -1,4 +1,4 @@
-package com.example.controledeprodutos;
+package com.example.controledeprodutos.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.controledeprodutos.model.Produto;
+import com.example.controledeprodutos.R;
+
 import java.util.List;
 
 public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.myViewHolder> {
 
     private List<Produto>produtoList;
     private OnClick onClick;
-
-
 
     public AdapterProduto(List<Produto> produtoList, OnClick onClick) {
         this.produtoList = produtoList;
@@ -36,7 +37,6 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.myViewHo
     holder.textProduto.setText(produto.getNome());
     holder.textEstoque.setText("Estoque: " + produto.getEstoque());
     holder.textValor.setText(String.valueOf("R$ " + produto.getValor()));
-
     holder.itemView.setOnClickListener(View -> onClick.onClickListener(produto));
     }
 
@@ -46,7 +46,7 @@ public class AdapterProduto extends RecyclerView.Adapter<AdapterProduto.myViewHo
     }
 
     public interface OnClick{
-        Void onClickListener(Produto prooduto);
+        Void onClickListener(Produto produto);
     }
 
     static class myViewHolder extends RecyclerView.ViewHolder{

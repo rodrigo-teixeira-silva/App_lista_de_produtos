@@ -1,9 +1,19 @@
-package com.example.controledeprodutos;
+package com.example.controledeprodutos.model;
 
 public class Produto {
+
+    private int id;
     private String nome;
     private int estoque;
     private double valor;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

@@ -17,6 +17,7 @@ import com.example.controledeprodutos.R;
 
 public class Criar_contaActivity extends AppCompatActivity {
 
+
     private EditText edit_nome;
     private EditText edit_email;
     private EditText edit_senha;

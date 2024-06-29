@@ -20,12 +20,18 @@ import com.example.controledeprodutos.R;
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
 import com.tsuryo.swipeablerv.SwipeableRecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity implements AdapterProduto.OnClick {
 
     private AdapterProduto adapterProduto;
+    private List<Produto> produtoList = new ArrayList<>();
     private SwipeableRecyclerView rvProdutos;
+
     private ImageButton ibAdd;
     private ImageButton ibVerMais;
+
     private ProdutoDAO produtoDAO;
 
     @Override
@@ -40,15 +46,24 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
             ibAdd = findViewById(R.id.ib_add);
             ibVerMais = findViewById(R.id.ib_ver_mais);
             rvProdutos = findViewById(R.id.rvProdutos);
-            produtoDAO = new ProdutoDAO(this);
 
-            configRecycleView();
+            Produto produto = new Produto();
+
+            produtoDAO = new ProdutoDAO(this);
+            produtoList = produtoDAO.getlistProduto();
 
             ouvinteCliques();
 
             return insets;
 
         });
+    }
+
+    protected void onStart() {
+        super.onStart();
+
+        configRecycleView();
+
     }
 
     private void ouvinteCliques() {
@@ -75,31 +90,37 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
     //metodo
     private void configRecycleView() {
+
+        produtoList.clear();
+        produtoList = produtoDAO.getlistProduto();
+
         rvProdutos.setLayoutManager(new LinearLayoutManager(this));
         rvProdutos.setHasFixedSize(true);
-        adapterProduto = new AdapterProduto(produtoDAO.getlistProduto(), this);
+        adapterProduto = new AdapterProduto(produtoList, this);
         rvProdutos.setAdapter(adapterProduto);
 
         rvProdutos.setListener(new SwipeLeftRightCallback.Listener() {
             @Override
             public void onSwipedLeft(int position) {
-
             }
 
             @Override
             public void onSwipedRight(int position) {
 
-                produtoDAO.getlistProduto().remove(position);
-                adapterProduto.notifyItemRemoved(position);
+                Produto produto = produtoList.get(position);
 
+                produtoDAO.deleteProduto(produto);
+                produtoList.remove(produto);
+                adapterProduto.notifyItemRemoved(position);
             }
         });
     }
 
     @Override
     public Void onClickListener(Produto prooduto) {
-        Toast.makeText(this, prooduto.getNome(), Toast.LENGTH_SHORT).show();
-
+        Intent intent = new Intent(this, FormProdutoActvty.class);
+        intent.putExtra("produto", prooduto);
+        startActivity(intent);
         return null;
     }
 }

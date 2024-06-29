@@ -1,6 +1,7 @@
 package com.example.controledeprodutos.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -20,6 +21,7 @@ public class FormProdutoActvty extends AppCompatActivity {
     private EditText edit_quantidade;
     private EditText edit_valor;
     private ProdutoDAO produtoDAO;
+    private Produto produto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,18 @@ public class FormProdutoActvty extends AppCompatActivity {
 
             edit_produto = findViewById(R.id.edit_produto);
 
-            produtoDAO = new  ProdutoDAO(this);
+            produtoDAO = new ProdutoDAO(this);
+
+            edit_produto.setText(produto.getNome());
+            edit_quantidade.setText(String.valueOf(produto.getEstoque()));
+            edit_valor.setText(String.valueOf(produto.getValor()));
+
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null) {
+                produto = (Produto) bundle.getSerializable("produto");
+
+                editProduto();
+            }
 
             edit_produto = findViewById(R.id.edit_produto);
             edit_quantidade = findViewById(R.id.edit_quantidade);
@@ -42,55 +55,20 @@ public class FormProdutoActvty extends AppCompatActivity {
         });
     }
 
-    public void salvarProduto(View view) {
+    private void editProduto() {
+        edit_produto.setText(produto.getNome());
+        edit_quantidade.setText(String.valueOf(produto.getEstoque()));
+        edit_valor.setText(String.valueOf(produto.getValor()));
+    }
 
-        String nome = edit_produto.getText().toString();
-        String quantidade = edit_quantidade.getText().toString();
-        String valor = edit_valor.getText().toString();
+    public void salvarProduto(Produto produto){
+        try {
+            String[] args = {String.valueOf(produto.getId())};
 
-        if (!nome.isEmpty()) {
-            if (!quantidade.isEmpty()) {
-
-                int qnt = Integer.parseInt(quantidade);
-
-                if (qnt >= 1) {
-
-                    if (!valor.isEmpty()) {
-
-                        double valorProduto = Double.parseDouble(valor);
-
-                        if (valorProduto > 0) {
-                            Produto produto = new Produto();
-                            produto.setNome(nome);
-                            produto.setEstoque(qnt);
-                            produto.setValor(valorProduto);
-
-                            produtoDAO.salvarProduto(produto);
-
-                            finish();
-
-                        } else {
-                            edit_valor.requestFocus();
-                            edit_valor.setError("Informe o valor maior que zero");
-                        }
-
-                    } else {
-                        edit_valor.requestFocus();
-                        edit_valor.setError("Informe o valor do produto");
-                    }
-
-                } else {
-                    edit_quantidade.requestFocus();
-                    edit_quantidade.setError("Informe um valor maior que zero");
-                }
-
-            } else {
-                edit_quantidade.requestFocus();
-                edit_quantidade.setError("Informe um valor valor");
-            }
-        } else {
-            edit_produto.requestFocus();
-            edit_produto.setError("Informe o nome do produto");
+        }catch(Exception e){
+            Log.e("error", "Erro ao deletar produto" + e.getMessage());
         }
+
+
     }
 }

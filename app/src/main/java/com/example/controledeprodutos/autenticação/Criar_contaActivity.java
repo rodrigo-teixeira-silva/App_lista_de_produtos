@@ -32,7 +32,7 @@ public class Criar_contaActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
-            iniciarComponentes();
+            iniciaComponentes();
 
             configCliques();
 
@@ -40,35 +40,36 @@ public class Criar_contaActivity extends AppCompatActivity {
         });
     }
 
-    private void configCliques(){
+    private void configCliques() {
         findViewById(R.id.ib_voltar).setOnClickListener(View -> finish());
     }
-    public void validaDados(View view){
+
+    public void validaDados(View view) {
         String nome = edit_nome.getText().toString();
         String email = edit_email.getText().toString();
         String senha = edit_senha.getText().toString();
 
-        if(!nome.isEmpty()){
-            if(!email.isEmpty()){
-                if(!senha.isEmpty()){
+        if (!nome.isEmpty()) {
+            if (!email.isEmpty()) {
+                if (!senha.isEmpty()) {
                     Toast.makeText(this, "Tudo certo", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     edit_senha.requestFocus();
                     edit_senha.setError("Informe sua senha");
                 }
 
-            }else {
+            } else {
                 edit_email.requestFocus();
                 edit_email.setError("Informe o email");
             }
 
-        }else {
+        } else {
             edit_nome.requestFocus();
             edit_nome.setError("Informe o nome");
         }
     }
 
-    private void iniciarComponentes() {
+    private void iniciaComponentes() {
         edit_nome = findViewById(R.id.edit_nome);
         edit_email = findViewById(R.id.edit_email);
         edit_senha = findViewById(R.id.edit_senha);

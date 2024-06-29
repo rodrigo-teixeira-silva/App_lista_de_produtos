@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.controledeprodutos.R;
 
+
 public class LoginActivity extends AppCompatActivity {
     private TextView text_criar_conta;
 
@@ -25,9 +26,9 @@ public class LoginActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
-            configCliques();
-
             iniciaComponentes();
+
+            configCliques();
 
             return insets;
         });
@@ -35,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void configCliques() {
         text_criar_conta.setOnClickListener(View -> startActivity(new Intent(this, Criar_contaActivity.class)));
+
     }
 
     private void iniciaComponentes() {

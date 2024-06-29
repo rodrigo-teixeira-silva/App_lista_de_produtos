@@ -14,6 +14,14 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="0dp" />
 
+<!--    <TextView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Nenhum Produto"-->
+<!--        android:textColor="@color/white" />-->
+
+
+
     <com.tsuryo.swipeablerv.SwipeableRecyclerView
         android:id="@+id/rvProdutos"
         android:layout_width="match_parent"

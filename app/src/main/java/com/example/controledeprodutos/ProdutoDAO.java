@@ -87,7 +87,7 @@ public class ProdutoDAO {
         try {
             String[] args = {String.valueOf(produto.getId())};
             String where = "id=?";
-            write.delete(DBHelper.TB_PRODUTO, "id=?",args);
+            write.delete(DBHelper.TB_PRODUTO, "id=?", args);
         } catch (Exception e) {
             Log.i("error", "Erro ao deletar produto" + e.getMessage());
         }

@@ -1,22 +1,28 @@
 package com.example.controledeprodutos.autenticação;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.controledeprodutos.R;
+import com.example.controledeprodutos.activity.MainActivity;
+import com.example.controledeprodutos.helper.FireBaseHelper;
+import com.example.controledeprodutos.model.Usuario;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 
 public class Criar_contaActivity extends AppCompatActivity {
-
 
     private EditText edit_nome;
     private EditText edit_email;
@@ -53,7 +59,17 @@ public class Criar_contaActivity extends AppCompatActivity {
         if (!nome.isEmpty()) {
             if (!email.isEmpty()) {
                 if (!senha.isEmpty()) {
-                    Toast.makeText(this, "Tudo certo", Toast.LENGTH_SHORT).show();
+
+                    progressBar.setVisibility(view.VISIBLE);
+
+                    Usuario usuario = new Usuario();
+                    usuario.setId(nome);
+                    usuario.setEmail(email);
+                    usuario.setSenha(senha);
+
+                    salvarCadastro(usuario);
+
+                    // Toast.makeText(this, "Tudo certo", Toast.LENGTH_SHORT).show();
                 } else {
                     edit_senha.requestFocus();
                     edit_senha.setError("Informe sua senha");
@@ -68,6 +84,26 @@ public class Criar_contaActivity extends AppCompatActivity {
             edit_nome.requestFocus();
             edit_nome.setError("Informe o nome");
         }
+    }
+
+    private void salvarCadastro(Usuario usuario) {
+        FireBaseHelper.getAuth().createUserWithEmailAndPassword(
+                usuario.getEmail(), usuario.getSenha()
+        ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+
+                    String id = task.getResult().getUser().getUid();
+                    usuario.setId(id);
+
+                    finish();
+//
+                    startActivity(new Intent(Criar_contaActivity.this, MainActivity.class));
+
+                }
+            }
+        });
     }
 
     private void iniciaComponentes() {

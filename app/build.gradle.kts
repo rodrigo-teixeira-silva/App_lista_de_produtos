@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -36,9 +38,17 @@ dependencies {
     implementation("com.github.tsuryo:Swipeable-RecyclerView:1.1")
 
     implementation(libs.constraintlayout)
+    implementation(libs.firebase.common)
+    implementation(libs.play.services.tasks)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
+    implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-auth")
+
+
 
 
 

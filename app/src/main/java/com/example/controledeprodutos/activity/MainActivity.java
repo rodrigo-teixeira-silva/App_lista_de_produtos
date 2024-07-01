@@ -28,10 +28,8 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
     private AdapterProduto adapterProduto;
     private List<Produto> produtoList = new ArrayList<>();
     private SwipeableRecyclerView rvProdutos;
-
     private ImageButton ibAdd;
     private ImageButton ibVerMais;
-
     private ProdutoDAO produtoDAO;
 
     @Override
@@ -50,7 +48,8 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
             Produto produto = new Produto();
 
             produtoDAO = new ProdutoDAO(this);
-            produtoList = produtoDAO.getlistProduto();
+
+           // produtoList = produtoDAO.getlistProduto();
 
             ouvinteCliques();
 
@@ -61,14 +60,11 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
     protected void onStart() {
         super.onStart();
-
-        configRecycleView();
-
+     //configRecycleView();
     }
 
     private void ouvinteCliques() {
         ibAdd.setOnClickListener(view -> {
-            //Toast.makeText(this, "Add", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, FormProdutoActvty.class));
         });
 
@@ -92,7 +88,9 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
     private void configRecycleView() {
 
         produtoList.clear();
-        produtoList = produtoDAO.getlistProduto();
+        //produtoList = produtoDAO.getlistProduto();
+
+       // produtoList = produtoDAO.getlistProduto();
 
         rvProdutos.setLayoutManager(new LinearLayoutManager(this));
         rvProdutos.setHasFixedSize(true);

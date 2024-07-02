@@ -16,6 +16,9 @@
 <!--            android:name=".nandoActivity"-->
 <!--            android:exported="false" />-->
         <activity
+            android:name=".nandoActivity"
+            android:exported="false" />
+        <activity
             android:name=".autenticação.Criar_contaActivity"
             android:exported="false">
             <intent-filter>

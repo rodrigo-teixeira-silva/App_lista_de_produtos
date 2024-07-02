@@ -12,7 +12,7 @@ Aplicação de lista de produtos com botões menu, adicionar produtos, toolbar p
 Aplicação utilizando a linguagem java na pratica, banco de dados SQLite, Aprovação de login com native base
 
 ## Layout mobile
-![Alt text](https://github.com/rodrigo-teixeira-silva/App_lista_de_produtos/blob/main/app/src/main/res/drawable/imagem-1.gif)
+![Alt text](https://github.com/rodrigo-teixeira-silva/app/src/main/java/com/example/controledeprodutos/assets/Tela de login.png)
 
 # Como executar o projeto
 

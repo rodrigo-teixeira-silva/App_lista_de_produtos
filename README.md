@@ -1,19 +1,32 @@
 
 ## 💻 Projeto
 
-# App_lista_de_produtos 
+# Controle de estoque
 
-# Sobre o projeto
+## Sobre o projeto
 
-Aplicação de lista de produtos com botões menu, adicionar produtos, toolbar personalizada, auteração de titulo, background, configuração de menus e tratativa de evento de click.
+Aplicação de controle de estoque com botões, menu, adição de produtos, toolbar personalizada, auteração de titulo, background, configuração de menus e tratativa de evento de click, banco de dados SQLite, Aprovação de login com native base e opções de deletar e editar produtos.
 
  **</>Codelink**.
 
-Aplicação utilizando a linguagem java na pratica, banco de dados SQLite, Aprovação de login com native base
+Aplicação utilizando a linguagem java na pratica.
 
-## Layout mobile
-![Alt text](https://github.com/rodrigo-teixeira-silva/app/src/main/java/com/example/controledeprodutos/assets/Tela de login.png)
+# Layout mobile
 
+## Tela de login
+<br>
+<img src="app/src/main/java/com/example/controledeprodutos/assets/Tela de login.png" width="200px" height="400px"/>
+<br>
+
+## Tela de cadastro
+<br>
+<img src="app/src/main/java/com/example/controledeprodutos/assets/Tela de cadastro.png" width="200px" height="400px"/>
+<br>
+
+## tela Prinncipal
+<br>
+<img src="app/src/main/java/com/example/controledeprodutos/assets/Tela principal.png" width="200px" height="400px"/>
+<br>
 # Como executar o projeto
 
 ```bash
@@ -21,10 +34,10 @@ Aplicação utilizando a linguagem java na pratica, banco de dados SQLite, Aprov
 git clone https://github.com/rodrigo-teixeira-silva/App_lista_de_produtos.git
 
 # gerar a build.
- run android
+ run 'app'
 ```
 ## Aplicação Mobile
-Pré-requisitos: android Studio e Sdk 29 
+Pré-requisitos: android Studio e Sdk 33 
 
 # Autor
 

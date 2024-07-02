@@ -16,15 +16,12 @@
 <!--            android:name=".nandoActivity"-->
 <!--            android:exported="false" />-->
         <activity
-            android:name=".nandoActivity"
-            android:exported="false" />
-        <activity
             android:name=".autenticação.Criar_contaActivity"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category" />
             </intent-filter>
         </activity>
         <activity
@@ -48,7 +45,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category" />
             </intent-filter>
         </activity>
     </application>

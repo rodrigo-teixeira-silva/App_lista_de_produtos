@@ -13,25 +13,39 @@ Aplicação utilizando a linguagem java na pratica.
 
 # Layout mobile
 
-## Tela de login
-<br>
-<img src="app/assets/Tela de login.png" width="200px" height="400px"/>
-<br>
+## Tela de login e Tela de cadastro
 
-## Tela de cadastro
-<br>
-<img src="app/assets/Tela de cadastro.png" width="200px" height="400px"/>
-<br>
+| Tela de login | Tela de cadastro |
+| ------------- | ---------------- |
+| <img src="app/assets/Tela de login.png" width="200px" height="400px" style="padding-right: 10px;"/> | <img src="app/assets/Tela de cadastro.png" width="200px" height="400px" style="padding-left: 10px;"/> |
 
-## Funcionalidades tela de login, recuperar senha e cadastrar novo usuário
-<br>
+## Tela recuperar Senha e Tela Principal
+
+| Tela recuperar Senha | Tela Principal |
+| -------------------- | -------------- |
+| <img src="app/assets/Recuperar_senha.png" width="200px" height="400px" style="padding-right: 10px;"/> | <img src="app/assets/Tela principal.png" width="200px" height="400px" style="padding-left: 10px;"/> |
+
+
 <img src="app/src/main/java/com/example/controledeprodutos/assets/Funcionalidades-tela-de_login.gif"/>
 <br>
 
-## tela Prinncipal
-<br>
-<img src="app/assets/Tela principal.png" width="200px" height="400px"/>
-<br>
+# Tecnologias utilizadas
+## Aplicação
+
+- [Swipeable-RecyclerView](https://github.com/tsuryo/Swipeable-RecyclerView)
+- [firebase](https://console.firebase.google.com/u/0/?hl=pt-br)
+- [SQLite](https://www.sqlite.org/releaselog/3_46_0.html)
+
+# Funcionalidades do projeto
+
+
+- [x] Tela de login
+- [x] Tela de recuperar conta 
+- [x] Cadastrar novo usuário
+- [X] Tela de Home (com splash bar)
+- [X] Tela de lista de produtos 
+
+
 # Como executar o projeto
 
 ```bash
@@ -47,8 +61,9 @@ Pré-requisitos: android Studio e Sdk 33
 # Autor
 
 Rodrigo Teixeira Silva
+## Desenvolvedor 
 
-<img style = "width:200px" src="https://github.com/rodrigo-teixeira-silva.png" alt="Imagem desenvolvedor" >
+<img src="https://github.com/rodrigo-teixeira-silva.png" alt="Imagem desenvolvedor" style="width:200px; height:200px; border-radius:50%; object-fit: cover;">
 
 ## [Linkedin](https://www.linkedin.com/in/rodrigo-teixeira-silva/)
 

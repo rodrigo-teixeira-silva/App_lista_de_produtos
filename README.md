@@ -15,12 +15,12 @@ Aplicação utilizando a linguagem java na pratica.
 
 ## Tela de login
 <br>
-<img src="app/src/main/java/com/example/controledeprodutos/assets/Tela de login.png" width="200px" height="400px"/>
+<img src="app/assets/Tela de login.png" width="200px" height="400px"/>
 <br>
 
 ## Tela de cadastro
 <br>
-<img src="app/src/main/java/com/example/controledeprodutos/assets/Tela de cadastro.png" width="200px" height="400px"/>
+<img src="app/assets/Tela de cadastro.png" width="200px" height="400px"/>
 <br>
 
 ## Funcionalidades tela de login, recuperar senha e cadastrar novo usuário
@@ -28,13 +28,9 @@ Aplicação utilizando a linguagem java na pratica.
 <img src="app/src/main/java/com/example/controledeprodutos/assets/Funcionalidades-tela-de_login.gif"/>
 <br>
 
-
-
-
-
 ## tela Prinncipal
 <br>
-<img src="app/src/main/java/com/example/controledeprodutos/assets/Tela principal.png" width="200px" height="400px"/>
+<img src="app/assets/Tela principal.png" width="200px" height="400px"/>
 <br>
 # Como executar o projeto
 

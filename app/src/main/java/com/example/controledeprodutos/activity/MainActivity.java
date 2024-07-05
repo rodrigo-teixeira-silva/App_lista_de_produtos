@@ -14,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.controledeprodutos.adapter.AdapterProduto;
+import com.example.controledeprodutos.autenticação.LoginActivity;
+import com.example.controledeprodutos.helper.FireBaseHelper;
 import com.example.controledeprodutos.model.Produto;
 import com.example.controledeprodutos.ProdutoDAO;
 import com.example.controledeprodutos.R;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
     protected void onStart() {
         super.onStart();
+
      //configRecycleView();
     }
 
@@ -76,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
             popupMenu.setOnMenuItemClickListener(MenuItem -> {
                 if (MenuItem.getItemId() == R.id.menu_sobre) {
                     Toast.makeText(this, "Sobre", Toast.LENGTH_SHORT).show();
+                } else if (MenuItem.getItemId() == R.id.menu_sair) {
+                    FireBaseHelper.getAuth().signOut();
+                    startActivity(new Intent(this, LoginActivity.class));
                 }
                 return true;
             });

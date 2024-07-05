@@ -3,7 +3,9 @@ package com.example.controledeprodutos.autenticação;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,9 @@ public class LoginActivity extends AppCompatActivity {
     private TextView text_criar_conta;
     private EditText edit_email;
     private EditText edit_senha;
+    private ProgressBar progressBar;
+    private TextView text_recuperar_conta;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +51,11 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!email.isEmpty()) {
             if (!senha.isEmpty()) {
+
+            //    progressBar.setVisibility(view.VISIBLE);
+
                 validaLogin(email, senha);
+
             } else {
                 edit_senha.requestFocus();
                 edit_senha.setError("Informe a sua senha");
@@ -60,25 +69,29 @@ public class LoginActivity extends AppCompatActivity {
     private void validaLogin(String email, String senha) {
         FireBaseHelper.getAuth().signInWithEmailAndPassword(
                 email, senha
-        ).addOnCompleteListener(
-                task -> {
+        ).addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         finish();
                         startActivity(new Intent(this, MainActivity.class));
                     } else {
                         String error = task.getException().getMessage();
                         Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
     }
 
     private void configCliques() {
         text_criar_conta.setOnClickListener(View -> startActivity(new Intent(this, Criar_contaActivity.class)));
+
+        text_recuperar_conta.setOnClickListener(View -> startActivity(new Intent(this, recuperarContaActivity.class)) );
     }
 
     private void iniciaComponentes() {
         text_criar_conta = findViewById(R.id.text_criar_conta);
         edit_email = findViewById(R.id.edit_email);
         edit_senha = findViewById(R.id.edit_senha);
+        text_recuperar_conta = findViewById(R.id.text_recuperar_conta);
+        progressBar = findViewById(R.id.progressBar);
     }
 }

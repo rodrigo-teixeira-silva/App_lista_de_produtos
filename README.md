@@ -13,18 +13,18 @@ Aplicação utilizando a linguagem java na pratica.
 
 # Layout mobile
 
-## Tela de login e Tela de cadastro
 
 | Tela de login | Tela de cadastro |
 | ------------- | ---------------- |
 | <img src="app/assets/Tela de login.png" width="200px" height="400px" style="padding-right: 10px;"/> | <img src="app/assets/Tela de cadastro.png" width="200px" height="400px" style="padding-left: 10px;"/> |
 
-## Tela recuperar Senha e Tela Principal
+
 
 | Tela recuperar Senha | Tela Principal |
 | -------------------- | -------------- |
 | <img src="app/assets/Recuperar_senha.png" width="200px" height="400px" style="padding-right: 10px;"/> | <img src="app/assets/Tela principal.png" width="200px" height="400px" style="padding-left: 10px;"/> |
 
+## Funcionalidade das telas de login, recuperar senha e cadastrar novo usuário
 
 <img src="app/src/main/java/com/example/controledeprodutos/assets/Funcionalidades-tela-de_login.gif"/>
 <br>

@@ -29,7 +29,6 @@ public class Criar_contaActivity extends AppCompatActivity {
     private EditText edit_senha;
     private ProgressBar progressBar;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +47,7 @@ public class Criar_contaActivity extends AppCompatActivity {
     }
 
     private void configCliques() {
-        findViewById(R.id.ib_voltar).setOnClickListener(View -> finish());
+        findViewById(R.id.ic_voltar).setOnClickListener(View -> finish());
     }
 
     public void validaDados(View view) {
@@ -111,6 +110,8 @@ public class Criar_contaActivity extends AppCompatActivity {
         edit_email = findViewById(R.id.edit_email);
         edit_senha = findViewById(R.id.edit_senha);
         progressBar = findViewById(R.id.progressBar);
+
+
 
         TextView text_titulo = findViewById(R.id.text_titulo);
         text_titulo.setText("Criar conta");

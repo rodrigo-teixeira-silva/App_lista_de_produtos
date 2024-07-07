@@ -20,6 +20,8 @@ public class recuperarContaActivity extends AppCompatActivity {
     private TextView edit_email;
     private ProgressBar progressBar;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,6 @@ public class recuperarContaActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
             iniciaComponentes();
-
 
             return insets;
         });
@@ -61,10 +62,17 @@ public class recuperarContaActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
             }
         });
+
     }
 
     private void iniciaComponentes() {
         edit_email = findViewById(R.id.edit_email);
         progressBar = findViewById(R.id.progressBar);
+
+
+        TextView text_titulo = findViewById(R.id.text_titulo);
+        text_titulo.setText("Recuperar Conta");
     }
+
+
 }

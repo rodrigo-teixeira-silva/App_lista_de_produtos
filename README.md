@@ -30,11 +30,11 @@ Aplicação utilizando a linguagem java na pratica.
 <br>
 
 # Tecnologias utilizadas
-## Aplicação
 
 - [Swipeable-RecyclerView](https://github.com/tsuryo/Swipeable-RecyclerView)
 - [firebase](https://console.firebase.google.com/u/0/?hl=pt-br)
 - [SQLite](https://www.sqlite.org/releaselog/3_46_0.html)
+- [ParkSangGwon/TedPermission](https://github.com/ParkSangGwon/TedPermission)
 
 # Funcionalidades do projeto
 

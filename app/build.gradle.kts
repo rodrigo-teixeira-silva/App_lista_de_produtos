@@ -35,6 +35,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
+
     implementation("com.github.tsuryo:Swipeable-RecyclerView:1.1")
 
     implementation(libs.constraintlayout)
@@ -47,9 +48,18 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
     implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-database")
+    implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-storage")
 
-
+    implementation("io.github.ParkSangGwon:tedpermission-normal:3.3.0")
 
 
 
 }
+
+
+
+
+
+

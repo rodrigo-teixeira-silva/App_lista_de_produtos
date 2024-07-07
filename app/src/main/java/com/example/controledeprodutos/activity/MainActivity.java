@@ -2,27 +2,36 @@ package com.example.controledeprodutos.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.controledeprodutos.R;
 import com.example.controledeprodutos.adapter.AdapterProduto;
 import com.example.controledeprodutos.autenticação.LoginActivity;
 import com.example.controledeprodutos.helper.FireBaseHelper;
 import com.example.controledeprodutos.model.Produto;
-import com.example.controledeprodutos.ProdutoDAO;
-import com.example.controledeprodutos.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.tsuryo.swipeablerv.SwipeLeftRightCallback;
 import com.tsuryo.swipeablerv.SwipeableRecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterProduto.OnClick {
@@ -31,8 +40,10 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
     private List<Produto> produtoList = new ArrayList<>();
     private SwipeableRecyclerView rvProdutos;
     private ImageButton ibAdd;
+    private TextView text_info;
     private ImageButton ibVerMais;
-    private ProdutoDAO produtoDAO;
+    private ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,27 +54,63 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
-            ibAdd = findViewById(R.id.ib_add);
-            ibVerMais = findViewById(R.id.ib_ver_mais);
-            rvProdutos = findViewById(R.id.rvProdutos);
-
             Produto produto = new Produto();
 
-            produtoDAO = new ProdutoDAO(this);
-
-           // produtoList = produtoDAO.getlistProduto();
+            iniciaComponentes();
 
             ouvinteCliques();
 
-            return insets;
+            configRecycleView();
 
+            return insets;
         });
     }
 
     protected void onStart() {
         super.onStart();
 
-     //configRecycleView();
+        recuperaProdutos();
+
+    }
+
+    public void recuperaProdutos() {
+        DatabaseReference produtosRef = FireBaseHelper.getDatabaseReference(); //nó principal
+        produtosRef.child("produtos");
+        produtosRef.child(FireBaseHelper.getIdFirebase());
+        produtosRef.addListenerForSingleValueEvent((new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                produtoList.clear();
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    Produto produto = snap.getValue(Produto.class);
+                    produtoList.add(produto);
+                }
+
+
+                Collections.reverse(produtoList);
+
+                //verificaQtdLista();
+
+                adapterProduto.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        }));
+
+    }
+
+    private void verificaQtdLista() {
+        if (produtoList.size() == 0) {
+            text_info.setText("Nenhum produto cadastrado");
+            text_info.setVisibility(View.VISIBLE);
+        } else {
+            ibAdd.setVisibility(View.GONE);
+            text_info.setVisibility(View.GONE);
+        }
+        progressBar.setVisibility(View.GONE);
     }
 
     private void ouvinteCliques() {
@@ -72,7 +119,6 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
         });
 
         ibVerMais.setOnClickListener(view -> {
-
             PopupMenu popupMenu = new PopupMenu(this, ibVerMais);
             popupMenu.getMenuInflater().inflate(R.menu.menu_toolbar, popupMenu.getMenu());
 
@@ -92,12 +138,6 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
     //metodo
     private void configRecycleView() {
-
-        produtoList.clear();
-        //produtoList = produtoDAO.getlistProduto();
-
-       // produtoList = produtoDAO.getlistProduto();
-
         rvProdutos.setLayoutManager(new LinearLayoutManager(this));
         rvProdutos.setHasFixedSize(true);
         adapterProduto = new AdapterProduto(produtoList, this);
@@ -113,9 +153,11 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
 
                 Produto produto = produtoList.get(position);
 
-                produtoDAO.deleteProduto(produto);
                 produtoList.remove(produto);
-                adapterProduto.notifyItemRemoved(position);
+                produto.deletaProduto();
+               adapterProduto.notifyItemRemoved(position);
+
+                verificaQtdLista();
             }
         });
     }
@@ -126,5 +168,13 @@ public class MainActivity extends AppCompatActivity implements AdapterProduto.On
         intent.putExtra("produto", prooduto);
         startActivity(intent);
         return null;
+    }
+
+    private void iniciaComponentes() {
+        ibAdd = findViewById(R.id.ib_add);
+        ibVerMais = findViewById(R.id.ib_ver_mais);
+        rvProdutos = findViewById(R.id.rvProdutos);
+
+
     }
 }
